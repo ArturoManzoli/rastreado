@@ -93,3 +93,5 @@ Relatos de bug, traduções e novos provedores são todos bem-vindos. Comece pel
 ## Licença
 
 [GPL-3.0-or-later](LICENSE). Copyright (C) 2026 Arturo Manzoli e contribuidores.
+
+Os ícones inclusos vêm do [Material Design Icons](https://pictogrammers.com/library/mdi/) (Apache-2.0).

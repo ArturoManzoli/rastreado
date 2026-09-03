@@ -10,6 +10,7 @@ All notable changes to this project are documented here. The format follows
 
 - Photographing an order screen now asks you to mark the tracking code and the product name,
   rather than guessing both from the whole frame
+- Archiving a parcel now reads as an inbox the parcel leaves, rather than a filing box
 
 ### Fixed
 

@@ -92,3 +92,5 @@ Bug reports, translations and provider implementations are all welcome. Start wi
 ## Licence
 
 [GPL-3.0-or-later](LICENSE). Copyright (C) 2026 Arturo Manzoli and contributors.
+
+Bundled icons come from [Material Design Icons](https://pictogrammers.com/library/mdi/) (Apache-2.0).
