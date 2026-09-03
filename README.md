@@ -40,7 +40,11 @@ It is offline-first, has no account, no analytics and no ads, and talks to exact
 
 ## Screenshots
 
-Not yet captured. Contributions welcome, see [CONTRIBUTING.md](CONTRIBUTING.md).
+| Parcels | Timeline | Add a parcel | Settings |
+| --- | --- | --- | --- |
+| <img src="docs/images/list.png" alt="List of tracked parcels, each with its status and code" width="200"> | <img src="docs/images/detail.png" alt="One parcel, showing both tracking codes, the carrier and the event history" width="200"> | <img src="docs/images/add.png" alt="Adding a parcel by barcode, screen photo or typing" width="200"> | <img src="docs/images/settings.png" alt="Theme, language and notification settings" width="200"> |
+
+Shown in Portuguese with the dark theme; both languages and the light theme are in Settings.
 
 ## Where the tracking data comes from
 

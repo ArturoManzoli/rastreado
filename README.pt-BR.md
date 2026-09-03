@@ -41,7 +41,11 @@ servidor.
 
 ## Capturas de tela
 
-Ainda não feitas. Contribuições são bem-vindas, veja o [CONTRIBUTING.md](CONTRIBUTING.md).
+| Encomendas | Histórico | Nova encomenda | Configurações |
+| --- | --- | --- | --- |
+| <img src="docs/images/list.png" alt="Lista de encomendas, cada uma com seu status e código" width="200"> | <img src="docs/images/detail.png" alt="Uma encomenda, com os dois códigos, a transportadora e o histórico" width="200"> | <img src="docs/images/add.png" alt="Adicionando uma encomenda por código de barras, foto da tela ou digitação" width="200"> | <img src="docs/images/settings.png" alt="Configurações de tema, idioma e notificações" width="200"> |
+
+Mostrado em português com o tema escuro; os dois idiomas e o tema claro estão nas configurações.
 
 ## De onde vêm os dados
 
