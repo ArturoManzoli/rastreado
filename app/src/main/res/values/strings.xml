@@ -2,4 +2,118 @@
 <!-- Brazilian Portuguese is the app's default language; English lives in values-en. -->
 <resources>
     <string name="app_name">Rastreado</string>
+
+    <!-- Notification channels -->
+    <string name="channel_updates_name">Atualizações de rastreio</string>
+    <string name="channel_updates_description">Avisos quando uma encomenda muda de status.</string>
+    <string name="channel_out_for_delivery_name">Saiu para entrega</string>
+    <string name="channel_out_for_delivery_description">Alarme sonoro quando a encomenda sai para entrega.</string>
+    <string name="channel_problems_name">Problemas na entrega</string>
+    <string name="channel_problems_description">Tentativas de entrega falhas, extravios e devoluções.</string>
+
+    <!-- Notifications -->
+    <plurals name="notification_events_count">
+        <item quantity="one">%1$d nova atualização</item>
+        <item quantity="other">%1$d novas atualizações</item>
+    </plurals>
+    <string name="notification_out_for_delivery_title">Sua encomenda saiu para entrega</string>
+    <string name="notification_out_for_delivery_body">%1$s está com o entregador hoje.</string>
+
+    <!-- Actions -->
+    <string name="action_add_parcel">Adicionar</string>
+    <string name="action_back">Voltar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_save">Salvar</string>
+    <string name="action_delete">Excluir</string>
+    <string name="action_archive">Arquivar</string>
+    <string name="action_unarchive">Desarquivar</string>
+    <string name="action_rename">Renomear</string>
+    <string name="action_dismiss_alarm">Parar alarme</string>
+    <string name="action_snooze_alarm">Soneca de 15 min</string>
+
+    <!-- Statuses -->
+    <string name="status_unknown">Sem informação</string>
+    <string name="status_pending">Pedido registrado</string>
+    <string name="status_warehouse">No centro de distribuição</string>
+    <string name="status_sorting">No centro de triagem</string>
+    <string name="status_export_customs">Alfândega de origem</string>
+    <string name="status_in_transit">Em trânsito internacional</string>
+    <string name="status_arrived_destination">Chegou ao Brasil</string>
+    <string name="status_import_customs">Na alfândega brasileira</string>
+    <string name="status_last_mile">Com a transportadora nacional</string>
+    <string name="status_out_for_delivery">Saiu para entrega</string>
+    <string name="status_awaiting_pickup">Aguardando retirada</string>
+    <string name="status_failed_attempt">Tentativa de entrega falhou</string>
+    <string name="status_exception">Problema na entrega</string>
+    <string name="status_delivered">Entregue</string>
+
+    <!-- Parcel list -->
+    <string name="parcels_archived_header">Arquivadas</string>
+    <string name="parcels_empty_title">Nenhuma encomenda por aqui</string>
+    <string name="parcels_empty_body">Adicione um código de rastreio digitando, lendo o código de barras ou fotografando a tela do pedido.</string>
+    <string name="parcel_sync_failed">Não foi possível consultar na última tentativa.</string>
+
+    <!-- Add parcel -->
+    <string name="add_title">Nova encomenda</string>
+    <string name="add_scan_barcode">Código de barras</string>
+    <string name="add_photograph_screen">Fotografar tela</string>
+    <string name="add_code_label">Código de rastreio</string>
+    <string name="add_code_hint">Por exemplo LP00837062153412 ou NN368369905BR.</string>
+    <string name="add_code_unusual_shape">Esse código não tem o formato usual de rastreio. Você ainda pode salvá-lo.</string>
+    <string name="add_name_label">Nome do produto</string>
+    <string name="add_name_hint">Opcional, para reconhecer a encomenda na lista.</string>
+    <string name="add_check_code">Consultar</string>
+    <string name="add_check_failed">Não foi possível consultar agora. Verifique sua conexão.</string>
+    <string name="add_code_not_found_yet">Ainda sem informação para esse código. Isso é normal nos primeiros dias.</string>
+    <string name="add_ocr_nothing_found">Não encontramos um código na foto. Tente enquadrar mais perto.</string>
+    <string name="add_barcode_instruction">Aponte para o código de barras da etiqueta.</string>
+    <string name="add_photo_instruction">Enquadre a tela do pedido com o código e o nome do produto visíveis.</string>
+    <string name="add_take_photo">Fotografar</string>
+
+    <!-- Parcel detail -->
+    <string name="detail_history">Histórico</string>
+    <string name="detail_no_events">Nenhum evento registrado ainda.</string>
+    <string name="detail_code">Código</string>
+    <string name="detail_last_mile_code">Código nacional</string>
+    <string name="detail_carrier">Transportadora</string>
+    <string name="detail_route">Rota</string>
+    <string name="detail_last_checked">Última consulta</string>
+    <string name="detail_notify_updates">Notificar atualizações</string>
+    <string name="detail_alarm_out_for_delivery">Alarme ao sair para entrega</string>
+    <string name="detail_alarm_out_for_delivery_hint">Toca no volume de alarme, mesmo com o telefone no silencioso.</string>
+    <string name="detail_delete_title">Excluir encomenda?</string>
+    <string name="detail_delete_body">O histórico salvo neste aparelho será apagado. Você pode adicionar o código novamente depois.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_appearance">Aparência</string>
+    <string name="theme_system">Seguir o sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Escuro</string>
+    <string name="settings_dynamic_color">Cores do papel de parede</string>
+    <string name="settings_dynamic_color_hint">Usa a paleta do sistema em vez das cores do app.</string>
+    <string name="settings_language">Idioma</string>
+    <string name="language_system">Seguir o sistema</string>
+    <string name="language_pt_br">Português (Brasil)</string>
+    <string name="language_en">English</string>
+    <string name="settings_notifications">Notificações</string>
+    <string name="settings_notifications_enabled">Avisar sobre atualizações</string>
+    <string name="settings_out_for_delivery">Quando sair para entrega</string>
+    <string name="alarm_mode_notification">Notificação comum</string>
+    <string name="alarm_mode_alarm">Alarme sonoro</string>
+    <string name="settings_alarm_vibrate">Vibrar durante o alarme</string>
+    <string name="settings_sync">Consultas automáticas</string>
+    <string name="sync_interval_15m">A cada 15 minutos</string>
+    <string name="sync_interval_30m">A cada 30 minutos</string>
+    <string name="sync_interval_1h">A cada hora</string>
+    <string name="sync_interval_3h">A cada 3 horas</string>
+    <string name="sync_interval_6h">A cada 6 horas</string>
+    <string name="settings_unmetered_only">Somente em Wi-Fi</string>
+    <string name="settings_unmetered_only_hint">Evita consultas usando dados móveis.</string>
+    <string name="settings_about">Sobre</string>
+    <string name="settings_data_source">Origem dos dados</string>
+    <string name="settings_data_source_hint">As informações vêm do rastreio público da Cainiao, que repassa os eventos da transportadora nacional. Os Correios restringiram sua API ao remetente do objeto.</string>
+    <string name="settings_version">Versão</string>
+    <string name="settings_source_code">Código-fonte</string>
+    <string name="settings_source_code_hint">Software livre sob a licença GPL-3.0. Toque para abrir no GitHub.</string>
 </resources>

@@ -1,4 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Rastreado</string>
+
+    <!-- Notification channels -->
+    <string name="channel_updates_name">Tracking updates</string>
+    <string name="channel_updates_description">Alerts when a parcel changes status.</string>
+    <string name="channel_out_for_delivery_name">Out for delivery</string>
+    <string name="channel_out_for_delivery_description">Audible alarm when a parcel goes out for delivery.</string>
+    <string name="channel_problems_name">Delivery problems</string>
+    <string name="channel_problems_description">Failed delivery attempts, lost parcels and returns.</string>
+
+    <!-- Notifications -->
+    <plurals name="notification_events_count">
+        <item quantity="one">%1$d new update</item>
+        <item quantity="other">%1$d new updates</item>
+    </plurals>
+    <string name="notification_out_for_delivery_title">Your parcel is out for delivery</string>
+    <string name="notification_out_for_delivery_body">%1$s is with the courier today.</string>
+
+    <!-- Actions -->
+    <string name="action_add_parcel">Add</string>
+    <string name="action_back">Back</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_archive">Archive</string>
+    <string name="action_unarchive">Unarchive</string>
+    <string name="action_rename">Rename</string>
+    <string name="action_dismiss_alarm">Stop alarm</string>
+    <string name="action_snooze_alarm">Snooze 15 min</string>
+
+    <!-- Statuses -->
+    <string name="status_unknown">No information</string>
+    <string name="status_pending">Order registered</string>
+    <string name="status_warehouse">At the warehouse</string>
+    <string name="status_sorting">At the sorting centre</string>
+    <string name="status_export_customs">Origin customs</string>
+    <string name="status_in_transit">In international transit</string>
+    <string name="status_arrived_destination">Arrived in Brazil</string>
+    <string name="status_import_customs">In Brazilian customs</string>
+    <string name="status_last_mile">With the local carrier</string>
+    <string name="status_out_for_delivery">Out for delivery</string>
+    <string name="status_awaiting_pickup">Awaiting pickup</string>
+    <string name="status_failed_attempt">Delivery attempt failed</string>
+    <string name="status_exception">Delivery problem</string>
+    <string name="status_delivered">Delivered</string>
+
+    <!-- Parcel list -->
+    <string name="parcels_archived_header">Archived</string>
+    <string name="parcels_empty_title">No parcels yet</string>
+    <string name="parcels_empty_body">Add a tracking code by typing it, scanning the barcode or photographing the order screen.</string>
+    <string name="parcel_sync_failed">The last lookup did not go through.</string>
+
+    <!-- Add parcel -->
+    <string name="add_title">New parcel</string>
+    <string name="add_scan_barcode">Barcode</string>
+    <string name="add_photograph_screen">Photograph screen</string>
+    <string name="add_code_label">Tracking code</string>
+    <string name="add_code_hint">For example LP00837062153412 or NN368369905BR.</string>
+    <string name="add_code_unusual_shape">This does not look like a usual tracking code. You can still save it.</string>
+    <string name="add_name_label">Product name</string>
+    <string name="add_name_hint">Optional, to recognise the parcel in the list.</string>
+    <string name="add_check_code">Look up</string>
+    <string name="add_check_failed">Could not look this up right now. Check your connection.</string>
+    <string name="add_code_not_found_yet">No information for this code yet. That is normal in the first few days.</string>
+    <string name="add_ocr_nothing_found">No code found in the photo. Try framing it more closely.</string>
+    <string name="add_barcode_instruction">Point at the barcode on the label.</string>
+    <string name="add_photo_instruction">Frame the order screen with the code and the product name visible.</string>
+    <string name="add_take_photo">Take photo</string>
+
+    <!-- Parcel detail -->
+    <string name="detail_history">History</string>
+    <string name="detail_no_events">No events recorded yet.</string>
+    <string name="detail_code">Code</string>
+    <string name="detail_last_mile_code">Local code</string>
+    <string name="detail_carrier">Carrier</string>
+    <string name="detail_route">Route</string>
+    <string name="detail_last_checked">Last checked</string>
+    <string name="detail_notify_updates">Notify about updates</string>
+    <string name="detail_alarm_out_for_delivery">Alarm when out for delivery</string>
+    <string name="detail_alarm_out_for_delivery_hint">Rings at alarm volume, even with the phone on silent.</string>
+    <string name="detail_delete_title">Delete parcel?</string>
+    <string name="detail_delete_body">The history stored on this device will be erased. You can add the code again later.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="theme_system">Follow the system</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_dynamic_color">Wallpaper colours</string>
+    <string name="settings_dynamic_color_hint">Uses the system palette instead of the app\'s own colours.</string>
+    <string name="settings_language">Language</string>
+    <string name="language_system">Follow the system</string>
+    <string name="language_pt_br">Português (Brasil)</string>
+    <string name="language_en">English</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notifications_enabled">Alert me about updates</string>
+    <string name="settings_out_for_delivery">When out for delivery</string>
+    <string name="alarm_mode_notification">Ordinary notification</string>
+    <string name="alarm_mode_alarm">Audible alarm</string>
+    <string name="settings_alarm_vibrate">Vibrate during the alarm</string>
+    <string name="settings_sync">Automatic lookups</string>
+    <string name="sync_interval_15m">Every 15 minutes</string>
+    <string name="sync_interval_30m">Every 30 minutes</string>
+    <string name="sync_interval_1h">Every hour</string>
+    <string name="sync_interval_3h">Every 3 hours</string>
+    <string name="sync_interval_6h">Every 6 hours</string>
+    <string name="settings_unmetered_only">Wi-Fi only</string>
+    <string name="settings_unmetered_only_hint">Avoids lookups over mobile data.</string>
+    <string name="settings_about">About</string>
+    <string name="settings_data_source">Where the data comes from</string>
+    <string name="settings_data_source_hint">Tracking comes from Cainiao\'s public feed, which relays the local carrier\'s events. Correios restricted its own API to the sender of the parcel.</string>
+    <string name="settings_version">Version</string>
+    <string name="settings_source_code">Source code</string>
+    <string name="settings_source_code_hint">Free software under the GPL-3.0 licence. Tap to open it on GitHub.</string>
 </resources>
