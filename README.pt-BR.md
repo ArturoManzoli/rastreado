@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/images/icon.png" alt="" width="112" height="112">
+
 # Rastreado
 
 **Acompanhe encomendas do AliExpress até a sua porta, no Brasil.**
