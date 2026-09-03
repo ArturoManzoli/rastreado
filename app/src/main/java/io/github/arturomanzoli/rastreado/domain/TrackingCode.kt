@@ -3,19 +3,22 @@ package io.github.arturomanzoli.rastreado.domain
 /**
  * Recognises the tracking-code shapes an AliExpress parcel bound for Brazil actually carries.
  *
- * Two matter in practice: the AliExpress/Cainiao forwarder code the buyer is given up front
- * (`LP` followed by 14 digits) and the UPU S10 code the last-mile carrier assigns once the parcel
- * lands (two letters, nine digits, then the `BR` country suffix).
+ * Two matter in practice: the AliExpress/Cainiao forwarder code the buyer is given up front (two
+ * letters such as `LP` or `AP` and a 14-digit run) and the UPU S10 code the last-mile carrier
+ * assigns once the parcel lands (two letters, nine digits, then the `BR` country suffix).
  */
 object TrackingCode {
 
     private val S10 = Regex("""\b([A-Z]{2}\d{9}[A-Z]{2})\b""")
-    private val CAINIAO = Regex("""\b(LP\d{12,16})\b""")
+    private val LOGISTICS_ID = Regex("""\b([A-Z]{2}\d{12,16})\b""")
     private val ALIEXPRESS = Regex("""\b(AE[A-Z0-9]{10,24})\b""")
     private val GENERIC = Regex("""\b([A-Z]{2,3}\d{8,20}|\d{13,20})\b""")
 
+    /** The shapes a carrier really issues, as opposed to anything code-like on a screen. */
+    private val KNOWN_SHAPES = listOf(S10, LOGISTICS_ID, ALIEXPRESS)
+
     /** Ordered most specific first so the best candidate wins. */
-    private val PATTERNS = listOf(S10, CAINIAO, ALIEXPRESS, GENERIC)
+    private val PATTERNS = KNOWN_SHAPES + GENERIC
 
     /** Uppercases and drops the separators a label or a human might introduce. */
     fun normalize(raw: String): String =
@@ -25,6 +28,17 @@ object TrackingCode {
         val code = normalize(raw)
         if (code.length !in 8..30) return false
         return PATTERNS.any { it.matches(code) }
+    }
+
+    /**
+     * True when [raw] is a shape a carrier issues, rather than only matching the catch-all.
+     *
+     * Lets a reader tell a code it read cleanly from one it merely found code-like, which is the
+     * difference between `LP00838460055517` and the `LPO0838460055517` a misread `0` produces.
+     */
+    fun isKnownShape(raw: String): Boolean {
+        val code = normalize(raw)
+        return KNOWN_SHAPES.any { it.matches(code) }
     }
 
     /**

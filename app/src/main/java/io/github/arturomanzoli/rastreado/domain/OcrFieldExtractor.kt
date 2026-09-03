@@ -13,8 +13,8 @@ object OcrFieldExtractor {
     )
 
     /**
-     * Glyphs a text recogniser confuses inside an otherwise numeric run. Applied only when the
-     * unrepaired text yields no code, so a correctly-read code is never rewritten.
+     * Glyphs a text recogniser confuses inside an otherwise numeric run. Every repair is kept only
+     * where it improves the match, so a correctly-read code is never rewritten.
      */
     private val DIGIT_REPAIRS = mapOf('O' to '0', 'Q' to '0', 'D' to '0', 'I' to '1', 'L' to '1', 'S' to '5', 'B' to '8')
 
@@ -40,9 +40,26 @@ object OcrFieldExtractor {
     }
 
     private fun findCodes(text: String): List<String> {
-        val direct = TrackingCode.findAll(text)
+        val direct = TrackingCode.findAll(text).map(::repairedToKnownShape).distinct()
         if (direct.isNotEmpty()) return direct
         return TrackingCode.findAll(repairDigits(text))
+    }
+
+    /**
+     * Rewrites the confusable glyphs in a candidate's digit run, keeping the result only when it
+     * lands on a shape a carrier issues.
+     *
+     * A misread digit next to the letter prefix, such as the `O` in `LPO0838460055517`, is beyond
+     * [repairDigits] (nothing flanks it on the left) and still passes as a three-letter prefix on
+     * the catch-all shape, so the code is stored wrong and the carrier reports nothing for it.
+     * Requiring the repair to reach a real shape is what makes it safe to try: a genuine
+     * three-letter prefix like `NLB123456789` repairs to no shape at all and is left alone.
+     */
+    private fun repairedToKnownShape(candidate: String): String {
+        if (TrackingCode.isKnownShape(candidate)) return candidate
+        val repaired = candidate.take(CARRIER_PREFIX_LENGTH) +
+            candidate.drop(CARRIER_PREFIX_LENGTH).map { DIGIT_REPAIRS[it] ?: it }.joinToString("")
+        return if (TrackingCode.isKnownShape(repaired)) repaired else candidate
     }
 
     /**
@@ -85,4 +102,7 @@ object OcrFieldExtractor {
 
     private const val MIN_NAME_LENGTH = 12
     private const val MAX_NAME_LENGTH = 120
+
+    /** Both families this app sees, Cainiao logistics ids and S10, name the carrier in two letters. */
+    private const val CARRIER_PREFIX_LENGTH = 2
 }

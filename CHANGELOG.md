@@ -6,6 +6,11 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Tracking codes read by OCR no longer keep a letter the recogniser mistook for a digit, which
+  left the parcel showing no information because the carrier had no such code
+
 ## [0.1.0] - 2026-09-03
 
 First release.
