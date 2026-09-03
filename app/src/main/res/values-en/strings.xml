@@ -68,6 +68,14 @@
     <string name="add_barcode_instruction">Point at the barcode on the label.</string>
     <string name="add_photo_instruction">Frame the order screen with the code and the product name visible.</string>
     <string name="add_take_photo">Take photo</string>
+    <string name="add_regions_instruction">Drag each rectangle over its field, and use the corner to resize it.</string>
+    <string name="add_region_code">Tracking code</string>
+    <string name="add_region_name">Product name</string>
+    <string name="add_region_resize_code">Resize the code area</string>
+    <string name="add_region_resize_name">Resize the name area</string>
+    <string name="add_region_empty">Nothing selected</string>
+    <string name="add_use_regions">Use</string>
+    <string name="add_retake_photo">Retake</string>
 
     <!-- Parcel detail -->
     <string name="detail_history">History</string>

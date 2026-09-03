@@ -69,6 +69,14 @@
     <string name="add_barcode_instruction">Aponte para o código de barras da etiqueta.</string>
     <string name="add_photo_instruction">Enquadre a tela do pedido com o código e o nome do produto visíveis.</string>
     <string name="add_take_photo">Fotografar</string>
+    <string name="add_regions_instruction">Arraste cada retângulo sobre o campo correspondente e use o canto para redimensionar.</string>
+    <string name="add_region_code">Código de rastreio</string>
+    <string name="add_region_name">Nome do produto</string>
+    <string name="add_region_resize_code">Redimensionar a área do código</string>
+    <string name="add_region_resize_name">Redimensionar a área do nome</string>
+    <string name="add_region_empty">Nada selecionado</string>
+    <string name="add_use_regions">Usar</string>
+    <string name="add_retake_photo">Nova foto</string>
 
     <!-- Parcel detail -->
     <string name="detail_history">Histórico</string>

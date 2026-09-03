@@ -9,8 +9,10 @@ object OcrFieldExtractor {
     data class Result(
         val code: String? = null,
         val productName: String? = null,
-        val otherCodes: List<String> = emptyList(),
     )
+
+    /** Where the code and the name appear to be, for the user to confirm or drag elsewhere. */
+    data class Suggestion(val code: PhotoRegion, val name: PhotoRegion)
 
     /**
      * Glyphs a text recogniser confuses inside an otherwise numeric run. Every repair is kept only
@@ -35,8 +37,44 @@ object OcrFieldExtractor {
         return Result(
             code = codes.firstOrNull(),
             productName = findProductName(lines, codes),
-            otherCodes = codes.drop(1),
         )
+    }
+
+    /** The text of the recognised lines [region] covers, wrapped lines joined into one string. */
+    fun textIn(lines: List<OcrLine>, region: PhotoRegion): String =
+        lines
+            .filter { region.coversRow(it.bounds) }
+            .sortedWith(compareBy({ it.bounds.top }, { it.bounds.left }))
+            .joinToString(" ") { it.text.trim() }
+            .trim()
+
+    /** The first tracking code in [text], repairing confusable glyphs only if none is found. */
+    fun codeIn(text: String): String? = findCodes(text).firstOrNull()
+
+    fun nameIn(text: String): String? =
+        text.take(MAX_NAME_LENGTH).trim().takeIf { it.isNotBlank() }
+
+    /**
+     * Aims a region at each field using the same heuristics the whole-photo read used, so the
+     * usual case is confirming two boxes rather than drawing them. Falls back to two bands in the
+     * middle of the photo when a field is not found, which is still somewhere to drag from.
+     */
+    fun suggestRegions(lines: List<OcrLine>): Suggestion {
+        val found = extract(lines.joinToString("\n") { it.text })
+        return Suggestion(
+            code = lineHolding(lines, found.code)?.bounds?.grownBy(CODE_PADDING, ROW_PADDING)
+                ?: PhotoRegion.of(left = 0.1f, top = 0.35f, width = 0.8f, height = 0.1f),
+            name = lineHolding(lines, found.productName)?.bounds?.grownBy(0f, ROW_PADDING)
+                ?: PhotoRegion.of(left = 0.1f, top = 0.55f, width = 0.8f, height = 0.14f),
+        )
+    }
+
+    /** Matches on the repaired text too, since a repaired code never appears in the raw line. */
+    private fun lineHolding(lines: List<OcrLine>, value: String?): OcrLine? {
+        val needle = value?.takeIf { it.isNotBlank() } ?: return null
+        return lines.firstOrNull { needle in it.text } ?: lines.firstOrNull {
+            needle in TrackingCode.normalize(repairDigits(it.text))
+        }
     }
 
     private fun findCodes(text: String): List<String> {
@@ -105,4 +143,8 @@ object OcrFieldExtractor {
 
     /** Both families this app sees, Cainiao logistics ids and S10, name the carrier in two letters. */
     private const val CARRIER_PREFIX_LENGTH = 2
+
+    /** A code sits on one short line, so its suggested box is widened to be draggable. */
+    private const val CODE_PADDING = 0.03f
+    private const val ROW_PADDING = 0.015f
 }

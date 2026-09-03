@@ -64,10 +64,15 @@ class AddParcelViewModel(private val repository: ParcelRepository) : ViewModel()
         }
     }
 
-    /** OCR fills the name too, but never overwrites a name the user already typed. */
+    /** Nothing legible in the photo, so the user is returned to the form with a word about it. */
+    fun onScreenUnreadable() = _uiState.update {
+        it.copy(mode = CaptureMode.MANUAL, messageRes = R.string.add_ocr_nothing_found)
+    }
+
+    /** The marked regions fill the name too, but never overwrite a name the user already typed. */
     fun onScreenRead(result: OcrFieldExtractor.Result) {
         if (result.code == null && result.productName == null) {
-            _uiState.update { it.copy(mode = CaptureMode.MANUAL, messageRes = R.string.add_ocr_nothing_found) }
+            onScreenUnreadable()
             return
         }
         _uiState.update { current ->

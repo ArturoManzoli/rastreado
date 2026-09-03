@@ -6,6 +6,11 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- Photographing an order screen now asks you to mark the tracking code and the product name,
+  rather than guessing both from the whole frame
+
 ### Fixed
 
 - Tracking codes read by OCR no longer keep a letter the recogniser mistook for a digit, which

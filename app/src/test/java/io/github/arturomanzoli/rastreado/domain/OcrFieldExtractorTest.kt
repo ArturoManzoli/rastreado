@@ -50,16 +50,15 @@ class OcrFieldExtractorTest {
     }
 
     @Test
-    fun `the local code is offered alongside the forwarder code`() {
+    fun `the local code wins over the forwarder code`() {
         val result = OcrFieldExtractor.extract("LP00837062153412\nNN368369905BR")
         assertEquals("NN368369905BR", result.code)
-        assertEquals(listOf("LP00837062153412"), result.otherCodes)
     }
 
     @Test
     fun `a photo with no code yields nothing rather than a guess`() {
         val result = OcrFieldExtractor.extract("Pedidos\nLoja\nAjuda")
         assertNull(result.code)
-        assertTrue(result.otherCodes.isEmpty())
+        assertNull(result.productName)
     }
 }
