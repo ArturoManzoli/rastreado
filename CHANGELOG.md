@@ -6,6 +6,10 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Signed release APKs published automatically from a `vX.Y.Z` tag, with a SHA-256 sum
+
 ### Changed
 
 - Photographing an order screen now asks you to mark the tracking code and the product name,

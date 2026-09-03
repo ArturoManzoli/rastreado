@@ -7,6 +7,7 @@
 **Acompanhe encomendas do AliExpress até a sua porta, no Brasil.**
 
 [![CI](https://github.com/ArturoManzoli/rastreado/actions/workflows/ci.yml/badge.svg)](https://github.com/ArturoManzoli/rastreado/actions/workflows/ci.yml)
+[![Release](https://github.com/ArturoManzoli/rastreado/actions/workflows/release.yml/badge.svg)](https://github.com/ArturoManzoli/rastreado/actions/workflows/release.yml)
 [![Licença: GPL v3](https://img.shields.io/badge/licen%C3%A7a-GPL--3.0-blue.svg)](LICENSE)
 [![Android 8.0+](https://img.shields.io/badge/android-8.0%2B-3ddc84.svg)](#requisitos)
 
@@ -78,6 +79,9 @@ cd rastreado
 São necessários o JDK 21 e o SDK do Android com a plataforma 37; o Gradle baixa o resto. Indique o
 SDK ao Gradle pela variável `ANDROID_HOME` ou por um `local.properties` com
 `sdk.dir=/caminho/para/Android/Sdk`.
+
+Cada versão é compilada a partir de uma tag `vX.Y.Z` e publicada com o APK e o hash SHA-256; veja
+[docs/RELEASING.md](docs/RELEASING.md).
 
 ## Arquitetura
 

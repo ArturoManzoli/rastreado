@@ -20,8 +20,24 @@ android {
         versionName = "0.1.0"
     }
 
+    // Present only when the signing material is supplied, so a plain checkout still builds a
+    // release (unsigned) without holding any key.
+    val releaseKeystore = System.getenv("RASTREADO_KEYSTORE")?.takeIf { it.isNotBlank() }
+
+    signingConfigs {
+        if (releaseKeystore != null) {
+            create("release") {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("RASTREADO_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("RASTREADO_KEY_ALIAS")
+                keyPassword = System.getenv("RASTREADO_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.findByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

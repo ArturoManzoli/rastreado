@@ -1,0 +1,110 @@
+name: Release
+
+# One installable build per version: pushing `vX.Y.Z` publishes the release APK under that
+# version. Tag and `versionName` must agree, so a mislabelled APK can never be published.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing version tag to build, for example v0.1.0'
+        required: true
+
+concurrency:
+  group: release-${{ github.event.inputs.tag || github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    env:
+      RASTREADO_KEYSTORE_BASE64: ${{ secrets.RASTREADO_KEYSTORE_BASE64 }}
+      RASTREADO_KEYSTORE_PASSWORD: ${{ secrets.RASTREADO_KEYSTORE_PASSWORD }}
+      RASTREADO_KEY_ALIAS: ${{ secrets.RASTREADO_KEY_ALIAS }}
+      RASTREADO_KEY_PASSWORD: ${{ secrets.RASTREADO_KEY_PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+
+      # Fail before building rather than publishing an APK no one can install.
+      - name: Require signing secrets
+        run: |
+          missing=
+          for name in RASTREADO_KEYSTORE_BASE64 RASTREADO_KEYSTORE_PASSWORD \
+                      RASTREADO_KEY_ALIAS RASTREADO_KEY_PASSWORD; do
+            [ -n "${!name}" ] || missing="$missing $name"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository secrets:$missing. See docs/RELEASING.md."
+            exit 1
+          fi
+
+      # An APK reporting a different version than its tag is unusable evidence, so a
+      # mismatch stops the run rather than being papered over.
+      - name: Check the tag matches versionName
+        run: |
+          tag="${{ github.event.inputs.tag || github.ref_name }}"
+          declared=$(grep -oP 'versionName\s*=\s*"\K[^"]+' app/build.gradle.kts)
+          echo "tag=$tag declared=$declared"
+          if [ "$tag" != "v$declared" ]; then
+            echo "::error::Tag $tag does not match versionName $declared in app/build.gradle.kts."
+            exit 1
+          fi
+          echo "version=$declared" >> "$GITHUB_ENV"
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platforms;android-37.2 build-tools;37.0.0 platform-tools'
+
+      - name: Unit tests
+        run: ./gradlew test
+
+      - name: Decode the keystore
+        run: |
+          printf '%s' "$RASTREADO_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+          # A truncated or non-base64 secret yields an unusable file; catch it here.
+          test -s "$RUNNER_TEMP/release.jks"
+
+      - name: Assemble release
+        env:
+          RASTREADO_KEYSTORE: ${{ runner.temp }}/release.jks
+        run: ./gradlew assembleRelease
+
+      - name: Name the APK after its version
+        run: |
+          src=app/build/outputs/apk/release/app-release.apk
+          test -f "$src"
+          mkdir -p dist
+          cp "$src" "dist/rastreado-${{ env.version }}.apk"
+          (cd dist && sha256sum "rastreado-${{ env.version }}.apk" > SHA256SUMS)
+
+      - name: Discard the keystore
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.jks"
+
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          name: Rastreado ${{ env.version }}
+          generate_release_notes: true
+          files: |
+            dist/rastreado-${{ env.version }}.apk
+            dist/SHA256SUMS

@@ -7,6 +7,7 @@
 **Track AliExpress parcels all the way to your door in Brazil.**
 
 [![CI](https://github.com/ArturoManzoli/rastreado/actions/workflows/ci.yml/badge.svg)](https://github.com/ArturoManzoli/rastreado/actions/workflows/ci.yml)
+[![Release](https://github.com/ArturoManzoli/rastreado/actions/workflows/release.yml/badge.svg)](https://github.com/ArturoManzoli/rastreado/actions/workflows/release.yml)
 [![License: GPL v3](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
 [![Android 8.0+](https://img.shields.io/badge/android-8.0%2B-3ddc84.svg)](#requirements)
 
@@ -77,6 +78,9 @@ cd rastreado
 JDK 21 and the Android SDK with platform 37 are required; Gradle downloads everything else. Point
 Gradle at your SDK either through `ANDROID_HOME` or a `local.properties` holding
 `sdk.dir=/path/to/Android/Sdk`.
+
+Every release is built from a `vX.Y.Z` tag and published with its APK and SHA-256 sum; see
+[docs/RELEASING.md](docs/RELEASING.md).
 
 ## Architecture
 
