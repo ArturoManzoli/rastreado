@@ -1,0 +1,61 @@
+name: Bug report
+description: Something in the app does not work
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a tracking event the app reads wrong, please use the "Unrecognised tracking event"
+        template instead.
+
+        Você pode escrever em português.
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened
+      description: What you were doing, and what the app did.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce it
+      placeholder: |
+        1. Open the parcel list
+        2. Pull down to refresh
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: app_version
+    attributes:
+      label: App version
+      description: Shown at the bottom of Settings.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: android_version
+    attributes:
+      label: Android version and phone
+      placeholder: Android 15, Motorola Moto G84
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: App language
+      options:
+        - Português (Brasil)
+        - English
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: A screenshot or a logcat excerpt, if you have one.

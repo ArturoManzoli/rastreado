@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest something the app should do
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Rastreado deliberately does one thing: follow an AliExpress parcel to a Brazilian door.
+        Requests that fit that are much more likely to land than requests that widen it.
+
+        Você pode escrever em português.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is awkward today
+      description: The situation you run into, rather than the feature you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like the app to do
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: How you work around it now

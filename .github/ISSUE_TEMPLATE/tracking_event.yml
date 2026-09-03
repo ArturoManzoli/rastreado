@@ -1,0 +1,45 @@
+name: Unrecognised tracking event
+description: A status reads wrong, or shows as "No information" / "Sem informação"
+labels: [tracking]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is the most useful report you can send, and usually a two-line fix. Please do not
+        include your full tracking code if you would rather not: the event text and its action
+        code are what matter.
+
+        Você pode escrever em português.
+  - type: textarea
+    id: event
+    attributes:
+      label: The event text
+      description: As the app displayed it, copied or typed out.
+      placeholder: "[CURITIBA] Objeto em trânsito - por favor aguarde"
+    validations:
+      required: true
+  - type: input
+    id: action_code
+    attributes:
+      label: Action code
+      description: Shown beside the event in the parcel's history, if there is one.
+      placeholder: GTMS_SC_DEPART
+  - type: input
+    id: shown
+    attributes:
+      label: What the app showed
+      placeholder: Sem informação
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: What it should have shown
+      placeholder: Com a transportadora nacional
+    validations:
+      required: true
+  - type: input
+    id: carrier
+    attributes:
+      label: Carrier
+      placeholder: Correios(BR)
